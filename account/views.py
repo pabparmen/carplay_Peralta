@@ -40,4 +40,5 @@ def register(request):
     
     return render(request, 'account/register.html', {'user_form': user_form})
 
-
+def dashboard(request):
+    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
