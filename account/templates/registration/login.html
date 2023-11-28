@@ -4,7 +4,10 @@
 
 {% block content %}
   <h1>Incio sesión </h1>
-  <p>Por favor, introduzca sus datos:</p>
+  <p>
+    Por favor, introduzca sus datos.
+    Si no tienes una cuenta <a href="{% url "register" %}">registrate aquí</a>.
+   </p>
   <form method="post">
     {{ form.as_p }}
     {% csrf_token %}
