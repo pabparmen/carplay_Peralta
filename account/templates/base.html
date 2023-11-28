@@ -22,10 +22,11 @@
         <li {% if section == "perfil" %}class="selected"{% endif %}>
             <a href="#">Perfil</a>
         </li>
+        
+        {% endif %}
         <li {% if section == "datos" %}class="selected"{% endif %}>
           <a href="{% url "datos" %}">Sobre nosotros</a>
         </li>
-        {% endif %}
       </ul>
     <span class="user">
       {% if request.user.is_authenticated %}
