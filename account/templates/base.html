@@ -21,8 +21,12 @@
         {% if request.user.is_authenticated %}
         <li {% if section == "perfil" %}class="selected"{% endif %}>
             <a href="#">Perfil</a>
-          </li>
+        </li>
+        
         {% endif %}
+        <li {% if section == "datos" %}class="selected"{% endif %}>
+          <a href="{% url "datos" %}">Sobre nosotros</a>
+        </li>
       </ul>
     <span class="user">
       {% if request.user.is_authenticated %}

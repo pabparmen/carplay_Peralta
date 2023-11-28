@@ -42,3 +42,6 @@ def register(request):
 
 def dashboard(request):
     return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+
+def datos(request):
+    return render(request, 'account/datos.html', {'section': 'datos'})
