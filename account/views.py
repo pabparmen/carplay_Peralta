@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login 
 from .forms import LoginForm, UserRegistrationForm
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -45,3 +45,7 @@ def dashboard(request):
 
 def datos(request):
     return render(request, 'account/datos.html', {'section': 'datos'})
+
+@login_required
+def view_profile(request):
+    return render(request, 'account/profile.html', {'user': request.user})

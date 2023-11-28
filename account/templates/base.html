@@ -19,8 +19,8 @@
           <a href="#">Catálogo</a>
         </li>
         {% if request.user.is_authenticated %}
-        <li {% if section == "perfil" %}class="selected"{% endif %}>
-            <a href="#">Perfil</a>
+        <li {% if section == "profile" %}class="selected"{% endif %}>
+          <a href="{% url "profile" %}">Perfil</a>
         </li>
         
         {% endif %}
