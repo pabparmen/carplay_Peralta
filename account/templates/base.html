@@ -1,21 +1,55 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>{% block title %}{% endblock %}</title>
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
-   
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
-
 <body>
-    <div id="header">
-        <span class="logo">Carplay Peralta</span>
-    </div>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+  <div id="header">
+    <span class="logo">CarPlay Peralta</span>
+      <ul class="menu">
+        <li {% if section == "dashboard" %}class="selected"{% endif %}>
+          <a href="{% url "dashboard" %}">Inicio</a>
+        </li>
+        <li {% if section == "images" %}class="selected"{% endif %}>
+          <a href="#">Images</a>
+        </li>
+        <li {% if section == "catalogo" %}class="selected"{% endif %}>
+          <a href="#">Catálogo</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li {% if section == "profile" %}class="selected"{% endif %}>
+          <a href="{% url "profile" %}">Perfil</a>
+        </li>
+        
+        {% endif %}
+        <li {% if section == "datos" %}class="selected"{% endif %}>
+          <a href="{% url "datos" %}">Sobre nosotros</a>
+        </li>
+      </ul>
+    <span class="user">
+      {% if request.user.is_authenticated %}
+        Hola {{ request.user.first_name|default:request.user.username }},
+        <a href="{% url "logout" %}">Cerrar sesión</a>
+      {% else %}
+        <a href="{% url "login" %}">Iniciar sesión</a>
+      {% endif %}
+    </span>
+  </div>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">
+          {{ message|safe }}
+          <a href="#" class="close">x</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
 </body>
-
 </html>
