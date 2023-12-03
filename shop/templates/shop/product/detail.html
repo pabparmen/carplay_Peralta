@@ -7,15 +7,31 @@
 {% block content %}
 
   <div class="product-detail">
+    <style>
+      .imagen-limitada {
+        max-width: 300px;
+        max-height: 200px;
+        width: auto;
+        height: auto;
+      }
+      .producto {
+          display: flex;
+          align-items: center;
+      }
+      .detalles-producto {
+          flex-grow: 1;
+          
+      }
+    </style>
     <img src="{% if product.image %}{{ product.image.url }}{% else %}
-    {% static "img/no_image.png" %}{% endif %}">
+    {% static "img/no_image.png" %}{% endif %}" class="imagen-limitada">
     <h1>{{ product.name }}</h1>
     <h2>
       <a href="{{ product.category.get_absolute_url }}">
-        {{ product.category }}
+        Tipo de producto: {{ product.category }}
       </a>
     </h2>
-    <p class="price">${{ product.price }}</p>
-    {{ product.description|linebreaks }}
+    <p class="price">Precio: ${{ product.price }}</p>
+    Información: {{ product.description|linebreaks }}
   </div>
 {% endblock %}
