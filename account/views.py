@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login 
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, BusquedaPedidoForm
 from django.contrib.auth.decorators import login_required
+from pedidos.models import Pedido
+
 
 
 # Create your views here.
@@ -49,3 +51,16 @@ def datos(request):
 @login_required
 def view_profile(request):
     return render(request, 'account/profile.html', {'user': request.user})
+
+
+def buscar_pedido_por_id(request):
+    resultados = None
+    form = BusquedaPedidoForm()  # Por defecto, muestra el formulario vacío
+    
+    if request.method == 'POST':
+        form = BusquedaPedidoForm(request.POST)
+        if form.is_valid():
+            id_pedido = form.cleaned_data['id_pedido']
+            resultados = Pedido.objects.filter(id=id_pedido)
+    
+    return render(request, 'account/dashboard.html', {'form': form, 'resultados': resultados})

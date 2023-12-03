@@ -1,10 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Buscar Pedido por ID{% endblock %}
 
 {% block content %}
-  <h1>Inicio</h1>
-  <p>
-  Bienvenido al inicio.
-  </p>
+  <h1>Buscar Pedido por ID</h1>
+  <form method="post" action="{% url 'buscar_pedido' %}">
+      {% csrf_token %}
+      <label for="id_pedido">ID del Pedido:</label>
+      <input type="number" id="id_pedido" name="id_pedido">
+      <button type="submit">Buscar</button>
+  </form>
+
+  {% if resultados %}
+      <h2>Resultados:</h2>
+      <ul>
+      {% for pedido in resultados %}
+          <li>
+              <strong>ID:</strong> {{ pedido.id }}<br>
+              <strong>Nombre:</strong> {{ pedido.nombre }}<br>
+              <strong>Apellidos:</strong> {{ pedido.apellidos }}<br>
+              <strong>Email:</strong> {{ pedido.email }}<br>
+              <strong>Dirección:</strong> {{ pedido.direccion }}<br>
+              <strong>Código Postal:</strong> {{ pedido.codigo_postal }}<br>
+              <strong>Ciudad:</strong> {{ pedido.ciudad }}<br>
+              <strong>Opciones de Envío:</strong> {{ pedido.opciones_envio }}<br>
+              <strong>Fecha del pedido:</strong> {{ pedido.creado }}<br>
+              <strong>Coste Total:</strong> {{ pedido.coste_total }}<br>
+              <!-- Mostrar otros campos del pedido si es necesario -->
+          </li>
+      {% endfor %}
+      </ul>
+  {% endif %}
 {% endblock %}
+
+

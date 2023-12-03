@@ -26,3 +26,7 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['contraseña'] != cd['contraseña2']:
             raise forms.ValidationError('La contraseña no coincide')
         return cd['contraseña2']
+
+
+class BusquedaPedidoForm(forms.Form):
+    id_pedido = forms.IntegerField(label='ID del Pedido')
