@@ -15,7 +15,6 @@ class Pedido(models.Model):
     creado = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
     pagado = models.BooleanField(default=False)
-    #Campo creado para gestionar el coste total del pedido
     coste_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     class Meta:
@@ -43,7 +42,7 @@ class Pedido(models.Model):
             self.coste_total = coste_total_sin_envio
             self.save()
             return coste_total_sin_envio
-    
+
 class PedidoItem(models.Model):
     pedido = models.ForeignKey(Pedido,
     related_name='items',
