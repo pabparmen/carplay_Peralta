@@ -1,7 +1,7 @@
 from django.db import models
 from shop.models import Product
 
-class Order(models.Model):
+class Pedido(models.Model):
     nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=50)
     email = models.EmailField()
@@ -15,6 +15,8 @@ class Order(models.Model):
     creado = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
     pagado = models.BooleanField(default=False)
+    #Campo creado para gestionar el coste total del pedido
+    coste_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     class Meta:
         ordering = ['-creado']
@@ -23,25 +25,31 @@ class Order(models.Model):
         ]
 
     def __str__(self):
-        return f'Order {self.id}'
+        return f'Pedido {self.id}'
     
     def get_total_cost(self):
         coste_total_sin_envio = sum(item.get_cost() for item in self.items.all())
         #El coste del envio general si el pedido excede los 50 se reduce a 0
         #sino es 10 y si es express 20
         if self.opciones_envio == "GE" and coste_total_sin_envio < 50:
+            self.coste_total = coste_total_sin_envio + 10
+            self.save()
             return coste_total_sin_envio + 10
         elif self.opciones_envio == "EX":
+            self.coste_total = coste_total_sin_envio + 20
+            self.save()
             return coste_total_sin_envio + 20
         else:
+            self.coste_total = coste_total_sin_envio
+            self.save()
             return coste_total_sin_envio
     
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order,
+class PedidoItem(models.Model):
+    pedido = models.ForeignKey(Pedido,
     related_name='items',
     on_delete=models.CASCADE)
     product = models.ForeignKey(Product,
-    related_name='order_items',
+    related_name='pedido_items',
     on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10,
     decimal_places=2)

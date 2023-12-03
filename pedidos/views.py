@@ -1,26 +1,26 @@
 from django.shortcuts import render
-from .models import OrderItem
-from .forms import OrderCreateForm
+from .models import PedidoItem, Pedido
+from .forms import PedidoCreateForm
 from cart.cart import Cart
 
-def order_create(request):
+def pedido_create(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
+        form = PedidoCreateForm(request.POST)
         if form.is_valid():
-            order = form.save()
+            pedido = form.save()
             for item in cart:
-                OrderItem.objects.create(order=order,
+                PedidoItem.objects.create(pedido=pedido,
                         product=item['product'],
                         price=item['price'],
                         quantity=item['quantity'])
             #Clear the cart
             cart.clear()
         return render(request,
-            'orders/order/created.html',
-            {'order': order})
+            'pedidos/pedido/created.html',
+            {'pedido': pedido})
     else:
-        form = OrderCreateForm()
+        form = PedidoCreateForm()
     return render(request,
-        'orders/order/create.html',
+        'pedidos/pedido/create.html',
         {'cart': cart, 'form': form})

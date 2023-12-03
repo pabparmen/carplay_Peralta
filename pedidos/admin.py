@@ -1,15 +1,15 @@
 from django.contrib import admin
 
-from .models import Order, OrderItem
+from .models import Pedido, PedidoItem
 
-class OrderItemInline(admin.TabularInline):
-    model = OrderItem
+class PedidoItemInline(admin.TabularInline):
+    model = PedidoItem
     raw_id_fields = ['product']
 
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
+@admin.register(Pedido)
+class PedidoAdmin(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'apellidos', 'email',
     'direccion', 'codigo_postal', 'ciudad', 'opciones_envio', 'pagado',
-    'creado', 'actualizado']
+    'creado', 'actualizado', 'coste_total']
     list_filter = ['pagado', 'creado', 'actualizado']
-    inlines = [OrderItemInline]
+    inlines = [PedidoItemInline]
