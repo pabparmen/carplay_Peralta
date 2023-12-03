@@ -2,26 +2,39 @@ from django.db import models
 from shop.models import Product
 
 class Order(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50)
+    apellidos = models.CharField(max_length=50)
     email = models.EmailField()
-    address = models.CharField(max_length=250)
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
+    direccion = models.CharField(max_length=250)
+    codigo_postal = models.CharField(max_length=20)
+    ciudad = models.CharField(max_length=100)
+    SHIPMENT_OPTIONS = [("GE", "General"),
+                        ("EX", "Express"),
+                        ("RT", "Recogida en Tienda")]
+    opciones_envio =models.CharField(max_length=18, choices = SHIPMENT_OPTIONS, default="GE")
+    creado = models.DateTimeField(auto_now_add=True)
+    actualizado = models.DateTimeField(auto_now=True)
+    pagado = models.BooleanField(default=False)
+
     class Meta:
-        ordering = ['-created']
+        ordering = ['-creado']
         indexes = [
-        models.Index(fields=['-created']),
+        models.Index(fields=['-creado']),
         ]
 
     def __str__(self):
         return f'Order {self.id}'
     
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        coste_total_sin_envio = sum(item.get_cost() for item in self.items.all())
+        #El coste del envio general si el pedido excede los 50 se reduce a 0
+        #sino es 10 y si es express 20
+        if self.opciones_envio == "GE" and coste_total_sin_envio < 50:
+            return coste_total_sin_envio + 10
+        elif self.opciones_envio == "EX":
+            return coste_total_sin_envio + 20
+        else:
+            return coste_total_sin_envio
     
 class OrderItem(models.Model):
     order = models.ForeignKey(Order,
