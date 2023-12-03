@@ -1,13 +1,13 @@
 {% extends "shop/base.html" %}
 
 {% block title %}
-    Checkout
+    Resumen de Compra
 {% endblock %}
 
 {% block content %}
-<h1>Checkout</h1>
-<div class="order-info">
-    <h3>Your order</h3>
+<h1>Resumen de Compra</h1>
+<div class="pedido-info">
+    <h3>Su pedido</h3>
     <ul>
         {% for item in cart %}
         <li>
@@ -18,9 +18,13 @@
     </ul>
     <p>Total: ${{ cart.get_total_price }}</p>
 </div>
-<form method="post" class="order-form">
+<div>
+    <h3> Si la compra excede los 50€ el envio general es gratuito, sino asciende a 10€ </h3>
+        <h4> El envío express vale 20 € sin importar el número de items </h4>
+</div>
+<form method="post" class="pedido-form">
     {{ form.as_p }}
-    <p><input type="submit" value="Place order"></p>
+    <p><input type="submit" value="Realizar pedido"></p>
     {% csrf_token %}
 </form>
 {% endblock %}
