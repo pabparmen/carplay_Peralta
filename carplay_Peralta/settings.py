@@ -109,10 +109,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Stripe settings
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51OJYtLDGsf3gxvHHkxgWGHM2DWZ2UtklHsQ30OfZEY5HhNlMJURYKpGQFFGjj6RzqVRVk6gQ5rS0fmdnBzQiwbLd00fDHbRx8U' # Publishable key
-STRIPE_SECRET_KEY = 'sk_test_51OJYtLDGsf3gxvHHVZLOLYv1szKEIDF6N55CDqR7wIkowLamcGI2p7pCEEPbcBQqobTp8zl8wBF4IxyZhchoXkLU00XFblMLZs' # Secret key
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51OJYtLDGsf3gxvHH9l38puoyDfFucgxJJKylmImRvJAUcN994Z9hN0dSysWMWSe7jQDKpqgWFH4M2U9cRf47mDf2004c9TLtD5' # Publishable key
+STRIPE_SECRET_KEY = 'sk_test_51OJYtLDGsf3gxvHHzdfg0XUNZx8IBUMqnz77XCougrSKicB8VMywnwOgs1wMNG9eQTIfY6pzkZRdIV0HJF7x6lBb006fnR43pv' # Secret key
 STRIPE_API_VERSION = '2022-08-01'
 STRIPE_WEBHOOK_SECRET = '' #inserta aqui tu secret key de webhook
+
 
 
 # Internationalization

@@ -157,7 +157,7 @@ stripe listen --forward-to localhost:8000/payment/webhook/
 ```
 Utilizamos este comando para indicarle a Stripe que escuche eventos y los envíe a nuestro servidor local. Utilizamos el puerto 8000, o el que sea donde se este ejecutando el servidor de desarrollo de Django, y la ruta /payment/webhook/, que coincide con el patrón de URL de nuestro webhook.
 
-Despues de esto, deberiamos ver la siguiente salida en el cmd:
+Despues de esto, deberiamos ver la siguiente salida en el cmd y copiar la clave que nos indican en settings.py, en STRIPE_WEBHOOK_SECRET:
 ```
 Getting ready... > Ready! You are using Stripe API Version [2022-08-01]. Your 
 webhook signing secret is xxxxxxxxxxxxxxxxxxx (^C to quit)
@@ -165,3 +165,5 @@ webhook signing secret is xxxxxxxxxxxxxxxxxxx (^C to quit)
 abre el enlace https://dashboard.stripe.com/test/webhooks y deberia de salir el dispositivo vinculado, bajo el nombre "oyente local" deberiamos poder ver nuestro PC
 
 En el cmd donde estamos ejecutando Stripe, es donde aparecerán los diferentes eventos que ocurren
+
+Las claves de Webhook caducan a los 90 dias de haberse generado, y recordad que deben permanecer en secreto.
