@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Formulario Datos Entrega{% endblock %}
+
+{% block content %}
+  <h2>Formulario de Datos de Entrega</h2>
+  <form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Guardar</button>
+  </form>
+{% endblock %}

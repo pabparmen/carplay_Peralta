@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from account.models import DatosEntrega 
 from django.contrib.auth import authenticate, login 
-from .forms import LoginForm, UserRegistrationForm, BusquedaPedidoForm
+from .forms import LoginForm, UserRegistrationForm, BusquedaPedidoForm, UserDatosEntregaForm
 from django.contrib.auth.decorators import login_required
 from pedidos.models import Pedido
 
@@ -70,3 +70,27 @@ def buscar_pedido_por_id(request):
             resultados = Pedido.objects.filter(num_referencia=num_referencia)
     
     return render(request, 'account/dashboard.html', {'form': form, 'resultados': resultados})
+
+@login_required
+def form_datos_entrega(request):
+    try:
+        datos_entrega = DatosEntrega.objects.get(usuario=request.user)
+    except DatosEntrega.DoesNotExist:
+        datos_entrega = None
+       
+    
+    if request.method == 'POST':
+        if datos_entrega: #si existen datos se actualiza el formulario
+            form = UserDatosEntregaForm(request.POST, instance=datos_entrega)
+        else:  # Si no existen datos de entrega crea un nuevo formulario
+            form = UserDatosEntregaForm(request.POST)
+
+        if form.is_valid():
+            datos_entrega = form.save(commit=False)
+            datos_entrega.usuario = request.user
+            datos_entrega.save()
+            return render(request, 'account/profile.html', {'user': request.user, 'datos_entrega':datos_entrega})
+    else:
+        form = UserDatosEntregaForm(instance=datos_entrega)
+
+    return render(request, 'account/form_datos_entrega.html', {'user': request.user, 'form': form})

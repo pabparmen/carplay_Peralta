@@ -10,13 +10,22 @@
             <p><strong>Nombre:</strong> {{ user.first_name }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
         </div>
+    </div>
 
+    <div class="datos-entrega-container">
         <h2>Datos de entrega</h2>
         <div class="datos-entrega-info">
             <p><strong>Direccion:</strong> {{ datos_entrega.direccion }}</p>
             <p><strong>Codigo Postal:</strong> {{ datos_entrega.codigo_postal }}</p>
             <p><strong>Ciudad:</strong> {{ datos_entrega.ciudad }}</p>
         </div>
+        <a href="http://127.0.0.1:8000/form_datos_entrega/">
+            <button type="button">Modificar Datos de Entrega</button>
+        </a>
     </div>
+
+
 {% endblock %}
+
+
 
