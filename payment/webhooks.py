@@ -2,7 +2,7 @@ import stripe
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from orders.models import Order
+from pedidos.models import Pedido
 
 
 @csrf_exempt
@@ -27,12 +27,12 @@ def stripe_webhook(request):
      session = event.data.object
      if session.mode == 'payment' and session.payment_status == 'paid':
        try:
-         order = Order.objects.get(id=session.client_reference_id)
-       except Order.DoesNotExist:
+         pedido = Pedido.objects.get(id=session.client_reference_id)
+       except Pedido.DoesNotExist:
          return HttpResponse(status=404)
        #marca las ordenes como pagadas
-       order.paid = True
+       pedido.pagado = True
        #almacena el Stripe ID del pago
-       order.stripe_id=session.payment_intent
-       order.save()
+       pedido.stripe_id=session.payment_intent
+       pedido.save()
    return HttpResponse(status=200)

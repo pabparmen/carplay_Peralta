@@ -1,8 +1,8 @@
 {% extends "shop/base.html" %}
 {% load static %}
-{% block title %}Pay your order{% endblock %}
+{% block title %}Pay your pedido{% endblock %}
 {% block content %}
- <h1>Order summary</h1>
+ <h1>Pedido summary</h1>
  <table class="cart">
  <thead>
     <tr>
@@ -14,7 +14,7 @@
     </tr>
 </thead>
 <tbody>
-    {% for item in order.items.all %}
+    {% for item in pedido.items.all %}
     <tr class="row{% cycle "1" "2" %}">
         <td>
             <img src="{% if item.product.image %}{{ item.product.image.url }}
@@ -28,7 +28,7 @@
     {% endfor %}
     <tr class="total">
         <td colspan="4">Total</td>
-        <td class="num">${{ order.get_total_cost }}</td>
+        <td class="num">${{ pedido.get_total_cost }}</td>
     </tr>
 </tbody>
 </table>
