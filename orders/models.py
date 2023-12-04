@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from shop.models import Product
 
 class Order(models.Model):
@@ -11,6 +12,9 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    #permite referenciar el pedido de Stripe en el order
+    stripe_id = models.CharField(max_length=250,blank=True)
+    
     class Meta:
         ordering = ['-created']
         indexes = [
@@ -22,6 +26,18 @@ class Order(models.Model):
     
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
+    
+    def get_stripe_url(self):
+        if not self.stripe_id:
+            #no hay pago asociado
+            return ''
+        if '_test_' in settings.STRIPE_SECRET_KEY:
+            #path para los tests de payment
+            path = '/test/'
+        #else:
+            #Path para pagos reales, no los necesitamos en la aplicación que yo sepa
+            #path = '/'
+        return f'https://dashboard.stripe.com{path}payments/{self.stripe_id}'
     
 class OrderItem(models.Model):
     order = models.ForeignKey(Order,

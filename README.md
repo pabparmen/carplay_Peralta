@@ -116,3 +116,52 @@ Successful payment 4242 4242 4242 4242 Any 3 digits Any future date
 Failed payment 4000 0000 0000 0002 Any 3 digits Any future date
 
 Los pagos se ven en la cuenta de stripe y se pueden exportar desde ahí a un csv
+
+
+Para testear Webhook (notificación de pagos en tiempo real): 
+(esto es para testear webhook en un ordenador, con hacerlo 1 vez ya puedes testearlo en ese sistema)
+
+Si estamos en macOS o linux con homebrew, instalamos Stripe CLI usando este comando:
+```
+brew install stripe/stripe-cli/stripe
+```
+
+Si usamos Windows, o macOS/Linux sin homebrew, descargamos la release desde el siguiente enlace:
+```
+https://github.com/stripe/stripe-cli/
+releases/latest
+```
+Y extraemos el zip. Si estamos usando Windows, ejecutamos el archivo .exe desde el cmd
+
+Ejecutamos el siguiente comando:
+```
+stripe login
+```
+que nos mostrará la siguiente salida:
+```
+Your pairing code is: xxxx-yyyy-zzzz-oooo
+This pairing code verifies your authentication with Stripe.
+Press Enter to open the browser or visit https://dashboard.stripe.com/
+stripecli/confirm_auth?t=...
+```
+Presionamos enter para que nos lleve a la url
+
+Comprobamos que el codigo en la url sea el mismo que el que nos muestra la cmd y si es asi, le damos a "Permitir Acceso", con eso nos deberia de salir en la web un mensaje tipo:
+```
+Acceso concedido
+Ahora puedes cerrar esta ventana y volver a la CLI.
+```
+despues de eso, ejecuta en el cmd:
+```
+stripe listen --forward-to localhost:8000/payment/webhook/
+```
+Utilizamos este comando para indicarle a Stripe que escuche eventos y los envíe a nuestro servidor local. Utilizamos el puerto 8000, o el que sea donde se este ejecutando el servidor de desarrollo de Django, y la ruta /payment/webhook/, que coincide con el patrón de URL de nuestro webhook.
+
+Despues de esto, deberiamos ver la siguiente salida en el cmd:
+```
+Getting ready... > Ready! You are using Stripe API Version [2022-08-01]. Your 
+webhook signing secret is xxxxxxxxxxxxxxxxxxx (^C to quit)
+```
+abre el enlace https://dashboard.stripe.com/test/webhooks y deberia de salir el dispositivo vinculado, bajo el nombre "oyente local" deberiamos poder ver nuestro PC
+
+En el cmd donde estamos ejecutando Stripe, es donde aparecerán los diferentes eventos que ocurren
