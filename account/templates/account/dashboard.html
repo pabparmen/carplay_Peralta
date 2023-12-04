@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}Buscar Pedido por ID{% endblock %}
+{% block title %}Buscar Pedido por el número de referencia del pedido{% endblock %}
 
 {% block content %}
-  <h1>Buscar Pedido por ID</h1>
-  <form method="post" action="{% url 'buscar_pedido' %}">
-      {% csrf_token %}
-      <label for="id_pedido">ID del Pedido:</label>
-      <input type="number" id="id_pedido" name="id_pedido">
-      <button type="submit">Buscar</button>
-  </form>
+<h1>Buscar Pedido por número de referencia</h1>
+<form method="post" action="{% url 'buscar_pedido' %}">
+    {% csrf_token %}
+    <label for="num_referencia">Número de referencia del pedido:</label>
+    <input type="number" id="num_referencia" name="num_referencia">
+    <button type="submit">Buscar</button>
+</form>
 
   {% if resultados %}
       <h2>Resultados:</h2>
       <ul>
       {% for pedido in resultados %}
           <li>
-              <strong>ID:</strong> {{ pedido.id }}<br>
+              <strong>Número de referencia:</strong> {{ pedido.num_referencia}}<br>
               <strong>Nombre:</strong> {{ pedido.nombre }}<br>
               <strong>Apellidos:</strong> {{ pedido.apellidos }}<br>
               <strong>Email:</strong> {{ pedido.email }}<br>
@@ -25,8 +25,8 @@
               <strong>Ciudad:</strong> {{ pedido.ciudad }}<br>
               <strong>Opciones de Envío:</strong> {{ pedido.opciones_envio }}<br>
               <strong>Fecha del pedido:</strong> {{ pedido.creado }}<br>
-              <strong>Coste Total:</strong> {{ pedido.coste_total }}<br>
-              <!-- Mostrar otros campos del pedido si es necesario -->
+              <strong>Estado del pedido:</strong> {{ pedido.estado_pedido}}<br>
+              <strong>Coste Total:</strong> {{ pedido.coste_total}}<br>
           </li>
       {% endfor %}
       </ul>
