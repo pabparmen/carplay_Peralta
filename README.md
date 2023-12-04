@@ -102,3 +102,7 @@ Quit the server with CONTROL-C.
 Accediendo a `http://127.0.0.1:8000/` podremos entrar en la pagina web del proyecto desde el punto de vista del usuario.
 
 Si accedemos a `http://127.0.0.1:8000/admin/` entraremos a la pagina web del administrador. 
+
+
+Para testear pagos, seguir guía de aqui:
+https://stripe.com/docs/testing
