@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from .models import PedidoItem
 from .forms import PedidoCreateForm
 from cart.cart import Cart
@@ -26,9 +27,12 @@ def pedido_create(request):
                 
             #Clear the cart
             cart.clear()
-        return render(request,
-            'pedidos/pedido/created.html',
-            {'pedido': pedido})
+
+            #set the pedido in the session
+            request.session['pedido_id']=pedido.id
+            #redirección a payment
+            return redirect(reverse('payment:process'))
+        
     else:
         form = PedidoCreateForm()
     return render(request,

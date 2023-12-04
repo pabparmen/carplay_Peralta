@@ -1,5 +1,6 @@
 import random
 from django.db import models
+from carplay_Peralta import settings
 from shop.models import Product
 
 class Pedido(models.Model):
@@ -24,6 +25,9 @@ class Pedido(models.Model):
     estado_pedido =models.CharField(max_length=14, choices = STATUS_OPTIONS, default="EP")
 
     num_referencia = models.BigIntegerField(unique=True, default=0)
+
+    #permite referenciar el pedido de Stripe en el pedido
+    stripe_id = models.CharField(max_length=250,blank=True)
 
     def save(self, *args, **kwargs):
         while True:
@@ -60,6 +64,18 @@ class Pedido(models.Model):
             self.coste_total = coste_total_sin_envio
             self.save()
             return coste_total_sin_envio
+
+    def get_stripe_url(self):
+        if not self.stripe_id:
+            #no hay pago asociado
+            return ''
+        if '_test_' in settings.STRIPE_SECRET_KEY:
+            #path para los tests de payment
+            path = '/test/'
+        #else:
+            #Path para pagos reales, no los necesitamos en la aplicación que yo sepa
+            #path = '/'
+        return f'https://dashboard.stripe.com{path}payments/{self.stripe_id}'
 
 class PedidoItem(models.Model):
     pedido = models.ForeignKey(Pedido,
