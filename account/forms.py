@@ -26,3 +26,9 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['contraseña'] != cd['contraseña2']:
             raise forms.ValidationError('La contraseña no coincide')
         return cd['contraseña2']
+
+
+class UserDatosEntregaForm(forms.ModelForm):
+    direccion = forms.CharField(max_length=250)
+    codigo_postal = forms.CharField(max_length=20)
+    ciudad = forms.CharField(max_length=100)

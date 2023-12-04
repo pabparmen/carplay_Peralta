@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login 
+from django.contrib.auth import authenticate, login
+
+from account.models import DatosEntrega 
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 
@@ -48,4 +50,7 @@ def datos(request):
 
 @login_required
 def view_profile(request):
-    return render(request, 'account/profile.html', {'user': request.user})
+    datos_entrega = DatosEntrega.objects.all().filter(usuario = request.user).get()
+    return render(request, 'account/profile.html', {'user': request.user, 'datos_entrega':datos_entrega})
+
+
