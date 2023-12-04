@@ -10,6 +10,6 @@ class PedidoItemInline(admin.TabularInline):
 class PedidoAdmin(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'apellidos', 'email',
     'direccion', 'codigo_postal', 'ciudad', 'opciones_envio', 'pagado',
-    'creado', 'actualizado', 'coste_total']
-    list_filter = ['pagado', 'creado', 'actualizado']
+    'creado', 'actualizado', 'coste_total','estado_pedido', 'num_referencia']
+    list_filter = ['pagado', 'creado', 'actualizado', 'estado_pedido']
     inlines = [PedidoItemInline]
