@@ -32,8 +32,15 @@
     </tr>
 </tbody>
 </table>
+<!-- Botón de pasarela de pago -->
 <form action="{% url "payment:process" %}" method="post">
     <input type="submit" value="Pay now">
     {% csrf_token %}
 </form>
+<!-- Botón de pago a contrareembolso -->
+<form action="{% url "payment:completed" %}" method="post">
+    <input type="submit" value="Pay on delivery">
+    {% csrf_token %}
+</form>
+
 {% endblock %}
