@@ -50,7 +50,10 @@ def datos(request):
 
 @login_required
 def view_profile(request):
-    datos_entrega = DatosEntrega.objects.all().filter(usuario = request.user).get()
-    return render(request, 'account/profile.html', {'user': request.user, 'datos_entrega':datos_entrega})
+    try:
+        datos_entrega = DatosEntrega.objects.all().filter(usuario = request.user).get()
+        return render(request, 'account/profile.html', {'user': request.user, 'datos_entrega':datos_entrega})
 
+    except DatosEntrega.DoesNotExist:
+        return render(request, 'account/profile.html', {'user': request.user})
 
