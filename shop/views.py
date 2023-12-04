@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Department, Manufacturer, Product
 from cart.forms import CartAddProductForm
+from django.db.models import Q
 
 def product_list(request, category_slug=None,department_slug=None,manufacturer_slug=None):
     category = None
@@ -11,6 +12,8 @@ def product_list(request, category_slug=None,department_slug=None,manufacturer_s
     departments = Department.objects.all()
     manufacturers = Manufacturer.objects.all()
     products = Product.objects.filter(available=True)
+
+    #Esto es para la busqueda segun las tres categorias dadas. 
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -24,6 +27,14 @@ def product_list(request, category_slug=None,department_slug=None,manufacturer_s
         manufacturer = get_object_or_404(Manufacturer, slug=manufacturer_slug)
         products = products.filter(manufacturer=manufacturer)
 
+
+    #Esto es para la busqueda del producto segun el nombre
+
+    search_query = request.GET.get('q')
+    if search_query:
+        products = products.filter(Q(name__icontains=search_query))
+
+
     return render(request,
                   'shop/product/list.html',
                   {'category': category,
@@ -32,7 +43,8 @@ def product_list(request, category_slug=None,department_slug=None,manufacturer_s
                    'departments':departments,
                    'manufacturer':manufacturer,
                    'manufacturers':manufacturers,
-                   'products': products})
+                   'products': products,
+                   'search_query': search_query})
 
 
 def product_detail(request, id, slug):
