@@ -103,6 +103,16 @@ Accediendo a `http://127.0.0.1:8000/` podremos entrar en la pagina web del proye
 
 Si accedemos a `http://127.0.0.1:8000/admin/` entraremos a la pagina web del administrador. 
 
+hay que instalar stripe, está en el requirements.txt pero tambien sirve hacer esto dentro del entorno virtual:
+```
+pip install stripe == 4.0.2
+```
 
 Para testear pagos, seguir guía de aqui:
 https://stripe.com/docs/testing
+
+Result Test Credit Card CVC Expiry date
+Successful payment 4242 4242 4242 4242 Any 3 digits Any future date
+Failed payment 4000 0000 0000 0002 Any 3 digits Any future date
+
+Los pagos se ven en la cuenta de stripe y se pueden exportar desde ahí a un csv
