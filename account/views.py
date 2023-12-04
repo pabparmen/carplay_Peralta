@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from account.models import DatosEntrega 
 from django.contrib.auth import authenticate, login 
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, BusquedaPedidoForm
 from django.contrib.auth.decorators import login_required
+from pedidos.models import Pedido
+
 
 
 # Create your views here.
@@ -48,4 +51,22 @@ def datos(request):
 
 @login_required
 def view_profile(request):
-    return render(request, 'account/profile.html', {'user': request.user})
+    try:
+        datos_entrega = DatosEntrega.objects.all().filter(usuario = request.user).get()
+        return render(request, 'account/profile.html', {'user': request.user, 'datos_entrega':datos_entrega})
+
+    except DatosEntrega.DoesNotExist:
+        return render(request, 'account/profile.html', {'user': request.user})
+
+
+def buscar_pedido_por_id(request):
+    resultados = None
+    form = BusquedaPedidoForm()  # Por defecto, muestra el formulario vacío
+    
+    if request.method == 'POST':
+        form = BusquedaPedidoForm(request.POST)
+        if form.is_valid():
+            num_referencia = form.cleaned_data['num_referencia']
+            resultados = Pedido.objects.filter(num_referencia=num_referencia)
+    
+    return render(request, 'account/dashboard.html', {'form': form, 'resultados': resultados})

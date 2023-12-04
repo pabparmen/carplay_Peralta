@@ -12,5 +12,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('datos/', views.datos, name='datos'),
     path('profile/', views.view_profile, name='profile'),
+     path('buscar_pedido/', views.buscar_pedido_por_id, name='buscar_pedido'),
+ 
 
 ]
