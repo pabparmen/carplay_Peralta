@@ -5,6 +5,7 @@
   {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
 
+
 {% block content %}
   <div id="sidebar">
     <h3>Categories</h3>
@@ -22,13 +23,32 @@
   <div id="main" class="product-list">
     <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
     {% for product in products %}
-      <div class="item">
+      <div class="producto">
+        <style>
+          .imagen-limitada {
+            max-width: 300px;
+            max-height: 200px;
+            width: auto;
+            height: auto;
+          }
+          .producto {
+              display: flex;
+              align-items: center;
+          }
+          .detalles-producto {
+              flex-grow: 1;
+              
+          }
+        </style>
         <a href="{{ product.get_absolute_url }}">
-          <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+          
+          <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="imagen-limitada">
         </a>
-        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        <div class ="detalles-producto">
+          <h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+        </div>
+        <p>Precio: ${{ product.price }}</p>
         <br>
-        ${{ product.price }}
       </div>
     {% endfor %}
   </div>

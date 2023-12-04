@@ -10,30 +10,30 @@
     <span class="logo">CarPlay Peralta</span>
       <ul class="menu">
         <li {% if section == "dashboard" %}class="selected"{% endif %}>
-          <a href="{% url "dashboard" %}">Inicio</a>
-        </li>
-        <li {% if section == "images" %}class="selected"{% endif %}>
-          <a href="#">Images</a>
+          <a href="http://127.0.0.1:8000">Inicio</a>
         </li>
         <li {% if section == "catalogo" %}class="selected"{% endif %}>
-          <a href="#">Catálogo</a>
+          <a href="http://127.0.0.1:8000/shop/">Catálogo</a>
         </li>
         {% if request.user.is_authenticated %}
         <li {% if section == "profile" %}class="selected"{% endif %}>
-          <a href="{% url "profile" %}">Perfil</a>
+          <a href="http://127.0.0.1:8000/profile">Perfil</a>
         </li>
         
         {% endif %}
         <li {% if section == "datos" %}class="selected"{% endif %}>
-          <a href="{% url "datos" %}">Sobre nosotros</a>
+          <a href="http://127.0.0.1:8000/datos">Sobre nosotros</a>
+        </li>
+        <li {% if section == "images" %}class="selected"{% endif %}>
+          <a href="http://127.0.0.1:8000/cart/">Carrito</a>
         </li>
       </ul>
     <span class="user">
       {% if request.user.is_authenticated %}
         Hola {{ request.user.first_name|default:request.user.username }},
-        <a href="{% url "logout" %}">Cerrar sesión</a>
+        <a href="http://127.0.0.1:8000/logout">Cerrar sesión</a>
       {% else %}
-        <a href="{% url "login" %}">Iniciar sesión</a>
+        <a href="http://127.0.0.1:8000/login">Iniciar sesión</a>
       {% endif %}
     </span>
   </div>

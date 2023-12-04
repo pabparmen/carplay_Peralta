@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
-    'orders.apps.OrdersConfig',
+    'pedidos.apps.PedidoConfig',
     'payment.apps.PaymentConfig',
 ]
 
@@ -113,13 +113,14 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_51OJYtLDGsf3gxvHH9l38puoyDfFucgxJJKylmImRvJAUc
 STRIPE_SECRET_KEY = '' # Secret key, solo añadir en local, esto no puede subirse al repo, pedirla a grosso o generar 
 #vuestro propio stripe siguiendo los pasos
 STRIPE_API_VERSION = '2022-08-01'
-STRIPE_WEBHOOK_SECRET = '' #añadir tu secret key de webhook
+STRIPE_WEBHOOK_SECRET = '' #inserta aqui tu secret key de webhook
+
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
