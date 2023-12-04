@@ -1,33 +1,55 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>{% block title %}My shop{% endblock %}</title>
-        <link href="{% static "css\base.css" %}" rel="stylesheet">
-    </head>
-
-    <body>
-        <div id="header">
-            <a href="/" class="logo">My shop</a>
-        </div>
-        <div id="subheader">
-        <div class="cart">
-            {% with total_items=cart|length %}
-                {% if total_items > 0 %}
-                    Your cart:
-                    <a href="{% url "cart:cart_detail" %}">
-                        {{ total_items }} item{{ total_items|pluralize }},
-                        ${{ cart.get_total_price }}
-                    </a>
-                {% elif not order %}
-                    Your cart is empty.
-                {% endif %}
-            {% endwith %}
-        </div>
-        <div id="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </body>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+  <div id="header">
+    <span class="logo">CarPlay Peralta</span>
+      <ul class="menu">
+        <li {% if section == "dashboard" %}class="selected"{% endif %}>
+          <a href="http://127.0.0.1:8000">Inicio</a>
+        </li>
+        <li {% if section == "catalogo" %}class="selected"{% endif %}>
+          <a href="http://127.0.0.1:8000/shop/">Catálogo</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li {% if section == "profile" %}class="selected"{% endif %}>
+          <a href="http://127.0.0.1:8000/profile">Perfil</a>
+        </li>
+        
+        {% endif %}
+        <li {% if section == "datos" %}class="selected"{% endif %}>
+          <a href="http://127.0.0.1:8000/datos">Sobre nosotros</a>
+        </li>
+        <li {% if section == "images" %}class="selected"{% endif %}>
+          <a href="http://127.0.0.1:8000/cart/">Carrito</a>
+        </li>
+      </ul>
+    <span class="user">
+      {% if request.user.is_authenticated %}
+        Hola {{ request.user.first_name|default:request.user.username }},
+        <a href="http://127.0.0.1:8000/logout">Cerrar sesión</a>
+      {% else %}
+        <a href="http://127.0.0.1:8000/login">Iniciar sesión</a>
+      {% endif %}
+    </span>
+  </div>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">
+          {{ message|safe }}
+          <a href="#" class="close">x</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
 </html>

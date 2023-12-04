@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from account.models import DatosEntrega 
 from django.contrib.auth import authenticate, login 
 from .forms import LoginForm, UserRegistrationForm, BusquedaPedidoForm
 from django.contrib.auth.decorators import login_required
@@ -50,7 +51,10 @@ def datos(request):
 
 @login_required
 def view_profile(request):
-    return render(request, 'account/profile.html', {'user': request.user})
+
+    datos_entrega = DatosEntrega.objects.all().filter(usuario = request.user).get()
+    return render(request, 'account/profile.html', {'user': request.user, 'datos_entrega':datos_entrega})
+
 
 
 def buscar_pedido_por_id(request):

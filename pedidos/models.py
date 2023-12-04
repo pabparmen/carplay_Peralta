@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from shop.models import Product
 
@@ -16,6 +17,23 @@ class Pedido(models.Model):
     actualizado = models.DateTimeField(auto_now=True)
     pagado = models.BooleanField(default=False)
     coste_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+
+    STATUS_OPTIONS = [("EP", "En preparación"),
+                        ("EC", "En camino"),
+                        ("RB", "Recibido")]
+    estado_pedido =models.CharField(max_length=14, choices = STATUS_OPTIONS, default="EP")
+
+    num_referencia = models.BigIntegerField(unique=True, default=0)
+
+    def save(self, *args, **kwargs):
+        while True:
+            nuevo_numero = random.randint(10**9, (10**10)-1)
+            # Verificar si el número ya existe en la base de datos
+            if not Pedido.objects.filter(num_referencia=nuevo_numero).exists():
+                break
+
+        self.num_referencia = nuevo_numero
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-creado']

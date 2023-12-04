@@ -28,5 +28,13 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['contraseña2']
 
 
+
+class UserDatosEntregaForm(forms.ModelForm):
+    direccion = forms.CharField(max_length=250)
+    codigo_postal = forms.CharField(max_length=20)
+    ciudad = forms.CharField(max_length=100)
+
+    
 class BusquedaPedidoForm(forms.Form):
     id_pedido = forms.IntegerField(label='ID del Pedido')
+
