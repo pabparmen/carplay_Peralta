@@ -36,5 +36,5 @@ class UserDatosEntregaForm(forms.ModelForm):
 
     
 class BusquedaPedidoForm(forms.Form):
-    id_pedido = forms.IntegerField(label='ID del Pedido')
+    num_referencia = forms.IntegerField(label='Número de referencia')
 

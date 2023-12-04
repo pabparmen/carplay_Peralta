@@ -64,7 +64,7 @@ def buscar_pedido_por_id(request):
     if request.method == 'POST':
         form = BusquedaPedidoForm(request.POST)
         if form.is_valid():
-            id_pedido = form.cleaned_data['id_pedido']
-            resultados = Pedido.objects.filter(id=id_pedido)
+            num_referencia = form.cleaned_data['num_referencia']
+            resultados = Pedido.objects.filter(num_referencia=num_referencia)
     
     return render(request, 'account/dashboard.html', {'form': form, 'resultados': resultados})
