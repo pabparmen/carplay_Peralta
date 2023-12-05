@@ -328,3 +328,29 @@ form div.field {
     color:#666;
     border-radius:4px;
 }
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: bold; /* Ajusta este valor según tus preferencias */
+    color: #f3f7cc; /* Puedes ajustar el color del texto según tus preferencias */
+}
+
+.logo {
+    font-weight: bold; /* Ajusta este valor según tus preferencias */
+    color: #f3f7cc; /* Puedes ajustar el color del texto según tus preferencias */
+}
+
+.user {
+    font-weight: bold; /* Ajusta este valor según tus preferencias */
+    color: #f3f7cc; /* Puedes ajustar el color del texto según tus preferencias */
+}
