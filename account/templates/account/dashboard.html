@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Buscar Pedido por el número de referencia del pedido{% endblock %}
+{% block title %}Buscar pedido por el número de referencia del pedido{% endblock %}
 
 {% block content %}
-<h1>Buscar Pedido por número de referencia</h1>
+<h1>Buscar pedido por número de referencia</h1>
 <form method="post" action="{% url 'buscar_pedido' %}">
     {% csrf_token %}
     <label for="num_referencia">Número de referencia del pedido:</label>
@@ -23,10 +23,10 @@
               <strong>Dirección:</strong> {{ pedido.direccion }}<br>
               <strong>Código Postal:</strong> {{ pedido.codigo_postal }}<br>
               <strong>Ciudad:</strong> {{ pedido.ciudad }}<br>
-              <strong>Opciones de Envío:</strong> {{ pedido.opciones_envio }}<br>
+              <strong>Opciones de Envío:</strong> {{ pedido.get_opciones_envio_display }}<br>
               <strong>Fecha del pedido:</strong> {{ pedido.creado }}<br>
-              <strong>Estado del pedido:</strong> {{ pedido.estado_pedido}}<br>
-              <strong>Coste Total:</strong> {{ pedido.coste_total}}<br>
+              <strong>Estado del pedido:</strong> {{ pedido.get_estado_pedido_display}}<br>
+              <strong>Coste Total:</strong> {{ pedido.coste_total}}€<br>
           </li>
       {% endfor %}
       </ul>

@@ -44,7 +44,9 @@ def payment_process(request):
         return render(request,'payment/process.html',locals())
 
 def payment_completed(request):
- return render(request, 'payment/completed.html')
+    pedido_id = request.session.get('pedido_id',None)
+    pedido=get_object_or_404(Pedido, id=pedido_id)
+    return render(request, 'payment/completed.html', {'pedido':pedido})
 
 def payment_canceled(request):
  return render(request, 'payment/canceled.html')
