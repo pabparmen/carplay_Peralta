@@ -82,6 +82,7 @@ ol {
 
 #content {
     padding:30px 100px;
+    margin-bottom: 60px; /* Ajusta este valor según sea necesario */
 }
 
 /* forms */
@@ -256,7 +257,11 @@ img.user-detail {
     float:left;
 }
 .profile-info {
-    float:left;
+    overflow:auto;
+    margin-right:20px;
+}
+
+.datos-entrega-info{
     overflow:auto;
     margin-right:20px;
 }
@@ -283,6 +288,16 @@ img.user-detail {
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.datos-entrega-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile-info {
@@ -296,4 +311,64 @@ img.user-detail {
 .profile-info strong {
     margin-right: 8px;
     font-weight: bold;
+}
+
+
+#footer {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para apilar los elementos verticalmente */
+    align-items: center; /* Centra horizontalmente los elementos */
+}
+
+.footer-links {
+    margin-bottom: 10px; /* Espacio entre los enlaces y el copyright */
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Ajusta el tamaño de la fuente según sea necesario */
+    margin: 0 10px; /* Espacio entre los enlaces */
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    color: white;
+    margin-right: 10px; /* Espacio entre los enlaces y el copyright */
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: bold; /* Ajusta este valor según tus preferencias */
+    color: #f3f7cc; /* Puedes ajustar el color del texto según tus preferencias */
+}
+
+.logo {
+    font-weight: bold; /* Ajusta este valor según tus preferencias */
+    color: #f3f7cc; /* Puedes ajustar el color del texto según tus preferencias */
+}
+
+.user {
+    font-weight: bold; /* Ajusta este valor según tus preferencias */
+    color: #f3f7cc; /* Puedes ajustar el color del texto según tus preferencias */
 }

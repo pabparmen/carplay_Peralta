@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import DatosEntrega
 
 class LoginForm(forms.Form):
     usuario = forms.CharField()
@@ -26,3 +27,13 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['contraseña'] != cd['contraseña2']:
             raise forms.ValidationError('La contraseña no coincide')
         return cd['contraseña2']
+
+
+class UserDatosEntregaForm(forms.ModelForm):
+    class Meta:
+        model = DatosEntrega
+        fields = ['direccion', 'codigo_postal', 'ciudad']
+    
+class BusquedaPedidoForm(forms.Form):
+    num_referencia = forms.IntegerField(label='Número de referencia')
+

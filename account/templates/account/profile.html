@@ -3,14 +3,49 @@
 {% block title %}Perfil de Usuario{% endblock %}
 
 {% block content %}
+    <style>
+        .btn-search {
+            background-color: #f8a976;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-search:hover {
+            background-color: #a16e4b;
+        }
+
+    </style>
+
+
     <div class="profile-container">
         <h2>Perfil</h2>
         <div class="profile-info">
             <p><strong>Usuario:</strong> {{ user.username }}</p>
             <p><strong>Nombre:</strong> {{ user.first_name }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
+            <a href="http://127.0.0.1:8000/estado_pedidos/">
+                <button type="button" class="btn-search">Estado de pedidos</button>
+            </a>
         </div>
     </div>
+
+    <div class="datos-entrega-container">
+        <h2>Datos de entrega</h2>
+        <div class="datos-entrega-info">
+            <p><strong>Dirección:</strong> {{ datos_entrega.direccion }}</p>
+            <p><strong>Código Postal:</strong> {{ datos_entrega.codigo_postal }}</p>
+            <p><strong>Ciudad:</strong> {{ datos_entrega.ciudad }}</p>
+        </div>
+        <a href="http://127.0.0.1:8000/form_datos_entrega/">
+            <button type="button" class="btn-search">Modificar Datos de Entrega</button>
+        </a>
+    </div>
+
+
 {% endblock %}
+
 
 

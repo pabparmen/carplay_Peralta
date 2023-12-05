@@ -1,0 +1,46 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Pasarela de pago{% endblock %}
+{% block content %}
+ <h1>Resumen de pedido</h1>
+ <table class="cart">
+ <thead>
+    <tr>
+        <th>Imagen</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+    </tr>
+</thead>
+<tbody>
+    {% for item in pedido.items.all %}
+    <tr class="row{% cycle "1" "2" %}">
+        <td>
+            <img src="{% if item.product.image %}{{ item.product.image.url }}
+            {% else %}{% static "img/no_image.png" %}{% endif %}">
+        </td>
+        <td>{{ item.product.name }}</td>
+        <td class="num">{{ item.price }}€</td>
+        <td class="num">{{ item.quantity }}</td>
+        <td class="num">{{ item.get_cost }}€</td>
+    </tr>
+    {% endfor %}
+    <tr class="total">
+        <td colspan="4">Total</td>
+        <td class="num">{{ pedido.get_total_cost }}€</td>
+    </tr>
+</tbody>
+</table>
+<!-- Botón de pasarela de pago -->
+<form action="{% url "payment:process" %}" method="post">
+    <input type="submit" value="Pagar ahora">
+    {% csrf_token %}
+</form>
+<!-- Botón de pago a contrareembolso -->
+<form action="{% url "payment:completed" %}" method="post">
+    <input type="submit" value="Pagar contrareembolso">
+    {% csrf_token %}
+</form>
+
+{% endblock %}
