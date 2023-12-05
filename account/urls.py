@@ -15,6 +15,9 @@ urlpatterns = [
     path('buscar_pedido/', views.buscar_pedido_por_id, name='buscar_pedido'),
     path('form_datos_entrega/', views.form_datos_entrega, name='form_datos_entrega'),
     path('reclamaciones/', views.reclamaciones, name='reclamaciones'),
+    path('terminos_de_uso_y_privacidad/', views.terminos_de_uso_y_privacidad, name='terminos_de_uso_y_privacidad'),
+    
+
  
 
 ]

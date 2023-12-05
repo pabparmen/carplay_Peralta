@@ -52,6 +52,11 @@ def datos(request):
 def reclamaciones(request):
     return render(request, 'account/reclamaciones.html', {'section': 'reclamaciones'})
 
+def terminos_de_uso_y_privacidad(request):
+    return render(request, 'account/terminos_de_uso_y_privacidad.html', {'section': 'terminos_de_uso_y_privacidad'})
+
+
+
 @login_required
 def view_profile(request):
     try:
