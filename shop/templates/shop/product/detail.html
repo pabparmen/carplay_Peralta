@@ -22,23 +22,51 @@
           flex-grow: 1;
           
       }
+
+      .btn-search {
+          background-color: #f8a976;
+          color: #fff;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+
+      .btn-search:hover {
+          background-color: #a16e4b;
+      }
     </style>
     <img src="{% if product.image %}{{ product.image.url }}{% else %}
     {% static "img/no_image.png" %}{% endif %}" class="imagen-limitada">
     <h1>{{ product.name }}</h1>
     <h2>
       <a href="{{ product.category.get_absolute_url }}">
-        Tipo de producto: {{ product.category }}
+        Categoria: {{ product.category }}
+      </a>
+    </h2>
+    <h2>
+      <a href="{{ product.department.get_absolute_url }}">
+        Departmento: {{ product.department }}
+      </a>
+    </h2>
+    <h2>
+      <a href="{{ product.manufacturer.get_absolute_url }}">
+        Fabricante: {{ product.manufacturer }}
       </a>
     </h2>
 
-    <p class="price">Precio: {{ product.price }}€</p>
-    <form action="{% url "cart:cart_add" product.id %}" method="post">
+    <h3>Precio:</h3>
+    <p class="price">{{ product.price }}€</p>
+    <br>
+
+    <form action="{% url "cart:cart_add" product.id %}" method="post" class="product-form">
       {{ cart_product_form }}
       {% csrf_token %}
-      <input type="submit" value="Añadir al carrito">
-     </form>
-    Información: {{ product.description|linebreaks }}
+      <input type="submit" value="Añadir al carrito" class="btn-search">
+    </form>
+
+    <h3>Información:</h3>
+    <p>{{ product.description|linebreaks }}</p>
 
   </div>
 {% endblock %}
