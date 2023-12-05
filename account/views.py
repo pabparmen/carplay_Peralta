@@ -49,6 +49,9 @@ def dashboard(request):
 def datos(request):
     return render(request, 'account/datos.html', {'section': 'datos'})
 
+def reclamaciones(request):
+    return render(request, 'account/reclamaciones.html', {'section': 'reclamaciones'})
+
 @login_required
 def view_profile(request):
     try:
