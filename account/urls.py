@@ -14,6 +14,7 @@ urlpatterns = [
     path('profile/', views.view_profile, name='profile'),
     path('buscar_pedido/', views.buscar_pedido_por_id, name='buscar_pedido'),
     path('form_datos_entrega/', views.form_datos_entrega, name='form_datos_entrega'),
+    path('estado_pedidos/', views.estado_pedidos, name='estado_pedidos'),
  
 
 ]

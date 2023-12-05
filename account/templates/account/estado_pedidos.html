@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Estado de pedidos{% endblock %}
+
+{% block content %}
+  <h2>Estado de pedidos</h2>
+
+  {% if pedidos %}
+    <ul>
+        {% for pedido in pedidos %}
+            <li>
+                <strong>Num. Referencia:</strong> {{ pedido.num_referencia }}<br>
+                <strong>Direccion:</strong> {{ pedido.direccion }}<br>
+                <strong>Opcion de envio:</strong> {{ pedido.opciones_envio }}<br>
+                <strong>Coste total:</strong> {{ pedido.coste_total }}<br>
+                <strong>Estado:</strong> {{ pedido.estado_pedido }}<br>
+                <!-- Otros detalles del pedido -->
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay pedidos disponibles.</p>
+{% endif %}
+  
+{% endblock %}
