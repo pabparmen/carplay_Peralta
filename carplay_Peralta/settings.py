@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'pedidos.apps.PedidoConfig',
     'payment.apps.PaymentConfig',
+    'django.core.mail',
+    'celery',
 ]
 
 MIDDLEWARE = [
@@ -109,8 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Stripe settings
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51OJYtLDGsf3gxvHH9l38puoyDfFucgxJJKylmImRvJAUcN994Z9hN0dSysWMWSe7jQDKpqgWFH4M2U9cRf47mDf2004c9TLtD5' # Publishable key
-STRIPE_SECRET_KEY = '' # Secret key, solo añadir en local, esto no puede subirse al repo, pedirla a grosso o generar 
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51OJfiMEjZZAAtqTo5bqRbnmUyuOb1HOlAHq0z0jPbQpZ3OpbVcHywgmw4KW47ilUNzizVwNYgvH4nWefTqBeeqks00DcTP8lax' # Publishable key
+STRIPE_SECRET_KEY = 'sk_test_51OJfiMEjZZAAtqTogvzWTNxvNOnX9KcfOOeQA0Q19DKsDZPwwXNfgTPuknuM4xdykgjFkfpbAFXZpdLY0XuZwxDl00b1agxpmp' # Secret key, solo añadir en local, esto no puede subirse al repo, pedirla a grosso o generar 
 #vuestro propio stripe siguiendo los pasos
 STRIPE_API_VERSION = '2022-08-01'
 STRIPE_WEBHOOK_SECRET = '' #inserta aqui tu secret key de webhook
@@ -147,3 +149,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Email server configuration
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'peraltacarplay@gmail.com'
+EMAIL_HOST_PASSWORD = 'tisi yzlj xehz jxcg'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

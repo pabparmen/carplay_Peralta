@@ -2,6 +2,7 @@ import stripe
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from payment.tasks import payment_completed
 from pedidos.models import Pedido
 
 
@@ -35,4 +36,6 @@ def stripe_webhook(request):
        #almacena el Stripe ID del pago
        pedido.stripe_id=session.payment_intent
        pedido.save()
+       # launch asynchronous task
+       payment_completed.delay(pedido.id)
    return HttpResponse(status=200)
