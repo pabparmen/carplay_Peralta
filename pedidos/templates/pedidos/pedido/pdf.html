@@ -1,0 +1,47 @@
+<html>
+<body>
+    <h1>Carplay Peralta</h1>
+    <p>
+        Recibo no. {{ pedido.num_referencia }}<br>
+        <span class="secondary">
+            {{ pedido.creado|date:"M d, Y" }}
+        </span>
+    </p>
+    <h3>Factura a</h3>
+    <p>
+        {{ pedido.nombre }} {{ pedido.apellidos }}<br>
+        {{ pedido.email }}<br>
+        {{ pedido.direccion }}<br>
+        {{ pedido.codigo_postal }}, {{ pedido.ciudad }}
+    </p>
+    <h3>Items comprados</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Coste</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pedido.items.all %}
+                <tr class="row{% cycle "1" "2" %}">
+                    <td>{{ item.product.name }}</td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">{{ item.quantity }}</td>
+                    <td class="num">${{ item.get_cost }}</td>
+                </tr>
+            {% endfor %}
+            <tr class="total">
+                <td colspan="3">Total</td>
+                <td class="num">${{ pedido.get_total_cost }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <span class="{% if pedido.pagado %}pagado{% else %}pendiente de pago{% endif %}">
+        {% if pedido.pagado %}Pagado{% else %}Pendiente de pago{% endif %}
+    </span>
+</body>
+</html>

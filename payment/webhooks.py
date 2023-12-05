@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from pedidos.models import Pedido
-
+from .tasks import payment_completed
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -35,4 +35,7 @@ def stripe_webhook(request):
        #almacena el Stripe ID del pago
        pedido.stripe_id=session.payment_intent
        pedido.save()
+       # Lanza la tarea asíncrona
+       payment_completed.delay(pedido.id)
    return HttpResponse(status=200)
+

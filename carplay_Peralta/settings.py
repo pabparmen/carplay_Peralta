@@ -78,6 +78,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'carplay_Peralta.wsgi.application'
 
+#Varía respecto a la máquina
+WEASYPRINT_DLL_DIRECTORIES = 'C:\Program Files\GTK3-Runtime Win64\bin'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -133,7 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = BASE_DIR / 'static'
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'

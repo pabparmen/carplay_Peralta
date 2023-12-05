@@ -1,0 +1,95 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}
+    Pedido {{ pedido.id }} {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url "admin:index" %}">Incio</a> &rsaquo;
+        <a href="{% url "admin:pedidos_pedido_changelist" %}">Pedidos</a>
+    &rsaquo;
+    <a href="{% url "admin:pedidos_pedido_change" pedido.id %}">Pedido {{ pedido.id
+}}</a>
+    &rsaquo; Detail
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="module">
+        <h1>Pedido {{ pedido.id }}</h1>
+        <ul class="object-tools">
+            <li>
+                <a href="#" onclick="window.print();">
+                    Mostrar pedido
+                </a>
+            </li>
+        </ul>
+        <table>
+            <tr>
+                <th>Creado</th>
+                <td>{{ pedido.creado }}</td>
+            </tr>
+            <tr>
+                <th>Customer</th>
+                <td>{{ pedido.nombre }} {{ pedido.apellidos }}</td>
+            </tr>
+            <tr>
+                <th>E-mail</th>
+                <td><a href="correo a:{{ pedido.email }}">{{ pedido.email }}</a></td>
+                </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>
+                {{ pedido.direccion }},
+                {{ pedido.codigo_postal }} {{ pedido.ciudad }}
+                </td>
+            </tr>
+            <tr>
+                <th>Total amount</th>
+                <td>${{ pedido.get_total_cost }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{% if pedido.pagado %}pagado{% else %}pendiente de pago{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Pago Stripe</th>
+                <td>
+                    {% if pedido.stripe_id %}
+                        <a href="{{ pedido.get_stripe_url }}" target="_blank">
+                        {{ pedido.stripe_id }}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="module">
+        <h2>Items comprados</h2>
+        <table style="width:100%">
+            <thead>
+                <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pedido.items.all %}
+                <tr class="row{% cycle "1" "2" %}">
+                    <td>{{ item.product.name }}</td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">{{ item.quantity }}</td>
+                    <td class="num">${{ item.get_cost }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="total">
+                <td colspan="3">Total</td>
+                    <td class="num">${{ pedido.get_total_cost }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
