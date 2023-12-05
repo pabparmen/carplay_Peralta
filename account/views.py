@@ -98,3 +98,12 @@ def form_datos_entrega(request):
         form = UserDatosEntregaForm(instance=datos_entrega)
 
     return render(request, 'account/form_datos_entrega.html', {'user': request.user, 'form': form})
+
+@login_required
+def estado_pedidos(request):
+    # Obtener los pedidos asociados al usuario actual
+    pedidos = Pedido.objects.filter(user=request.user)
+
+    # Puedes agregar más lógica según tus necesidades
+
+    return render(request, 'account/estado_pedidos.html', {'pedidos': pedidos})
