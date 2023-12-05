@@ -49,8 +49,12 @@ def dashboard(request):
 def datos(request):
     return render(request, 'account/datos.html', {'section': 'datos'})
 
+def reclamaciones(request):
+    return render(request, 'account/reclamaciones.html', {'section': 'reclamaciones'})
+
 def terminos_de_uso_y_privacidad(request):
     return render(request, 'account/terminos_de_uso_y_privacidad.html', {'section': 'terminos_de_uso_y_privacidad'})
+
 
 
 @login_required
