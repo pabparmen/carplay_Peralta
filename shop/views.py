@@ -11,7 +11,7 @@ def product_list(request, category_slug=None,department_slug=None,manufacturer_s
     categories = Category.objects.all()
     departments = Department.objects.all()
     manufacturers = Manufacturer.objects.all()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.all()
 
     #Esto es para la busqueda segun las tres categorias dadas. 
 
@@ -48,7 +48,7 @@ def product_list(request, category_slug=None,department_slug=None,manufacturer_s
 
 
 def product_detail(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    product = get_object_or_404(Product, id=id, slug=slug)
 
     cart_product_form = CartAddProductForm()
     return render(request,
