@@ -49,6 +49,10 @@ def dashboard(request):
 def datos(request):
     return render(request, 'account/datos.html', {'section': 'datos'})
 
+def terminos_de_uso_y_privacidad(request):
+    return render(request, 'account/terminos_de_uso_y_privacidad.html', {'section': 'terminos_de_uso_y_privacidad'})
+
+
 @login_required
 def view_profile(request):
     try:
