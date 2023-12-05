@@ -59,11 +59,15 @@
     <p class="price">{{ product.price }}€</p>
     <br>
 
-    <form action="{% url "cart:cart_add" product.id %}" method="post" class="product-form">
-      {{ cart_product_form }}
-      {% csrf_token %}
-      <input type="submit" value="Añadir al carrito" class="btn-search">
-    </form>
+    {% if not product.available %}
+      <strong><h2 style="color: red;">AGOTADO</h2></strong>
+    {%else %}
+      <form action="{% url "cart:cart_add" product.id %}" method="post" class="product-form">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Añadir al carrito" class="btn-search">
+      </form>
+    {%endif %}
 
     <h3>Información:</h3>
     <p>{{ product.description|linebreaks }}</p>
