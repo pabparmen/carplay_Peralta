@@ -1,4 +1,4 @@
-Django==4.10
+Django==4.1
 stripe==4.0.2
 WeasyPrint==56.1
 cssselect2==0.1
