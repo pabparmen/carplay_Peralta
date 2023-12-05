@@ -2,8 +2,10 @@ import random
 from django.db import models
 from carplay_Peralta import settings
 from shop.models import Product
+from django.contrib.auth.models import User
 
 class Pedido(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=50)
     email = models.EmailField()
