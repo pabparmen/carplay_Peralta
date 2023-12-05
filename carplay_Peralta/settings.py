@@ -122,7 +122,7 @@ STRIPE_WEBHOOK_SECRET = '' #inserta aqui tu secret key de webhook
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 

@@ -10,10 +10,10 @@
         {% for pedido in pedidos %}
             <li>
                 <strong>Num. Referencia:</strong> {{ pedido.num_referencia }}<br>
-                <strong>Direccion:</strong> {{ pedido.direccion }}<br>
-                <strong>Opcion de envio:</strong> {{ pedido.opciones_envio }}<br>
+                <strong>Dirección:</strong> {{ pedido.direccion }}<br>
+                <strong>Opción de envio:</strong> {{ pedido.get_opciones_envio_display }}<br>
                 <strong>Coste total:</strong> {{ pedido.coste_total }}<br>
-                <strong>Estado:</strong> {{ pedido.estado_pedido }}<br>
+                <strong>Estado:</strong> {{ pedido.get_estado_pedido_display }}<br>
                 <!-- Otros detalles del pedido -->
             </li>
         {% endfor %}

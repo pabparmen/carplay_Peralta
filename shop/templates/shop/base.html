@@ -21,8 +21,8 @@
         </li>
         
         {% endif %}
-        <li {% if section == "datos" %}class="selected"{% endif %}>
-          <a href="http://127.0.0.1:8000/datos">Sobre nosotros</a>
+        <li {% if section == "reclamaciones" %}class="selected"{% endif %}>
+          <a href="http://127.0.0.1:8000/reclamaciones">Ponerse en contacto</a>
         </li>
         <li {% if section == "images" %}class="selected"{% endif %}>
           <a href="http://127.0.0.1:8000/cart/">Carrito</a>
@@ -30,7 +30,7 @@
       </ul>
     <span class="user">
       {% if request.user.is_authenticated %}
-        Hola {{ request.user.first_name|default:request.user.username }},
+        <a href="http://127.0.0.1:8000/profile">Hola {{ request.user.first_name|default:request.user.username }},   </a>
         <a href="http://127.0.0.1:8000/logout">Cerrar sesión</a>
       {% else %}
         <a href="http://127.0.0.1:8000/login">Iniciar sesión</a>
@@ -51,5 +51,16 @@
     {% block content %}
     {% endblock %}
   </div>
+
+  <div id="footer">
+    <div class="footer-links">
+      <a href="http://127.0.0.1:8000/datos" class="footer-link">Sobre nosotros</a> |
+      <a href="http://127.0.0.1:8000/terminos_de_uso_y_privacidad" class="footer-link">Términos de uso y privacidad</a>
+    </div>
+    <div class="copyright">
+      &copy; CarPlay Peralta 2023
+    </div>
+  </div>
+  
 </body>
 </html>

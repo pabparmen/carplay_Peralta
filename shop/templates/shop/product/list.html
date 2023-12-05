@@ -109,7 +109,7 @@
           </a>
           <div class ="detalles-producto" style="flex-grow: 1;">
             <h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
-            <p>Precio: ${{ product.price }}</p>
+            <p>Precio: {{ product.price }}€</p>
           </div>
         </div>
       {% endfor %}
