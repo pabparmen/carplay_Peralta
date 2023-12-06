@@ -10,6 +10,7 @@ class Reclamacion(models.Model):
     STATUS_OPTIONS = [("EN", "Enviada"),
                         ("BR", "Bajo Revisión"),
                         ("RE", "Resuelta")]
+    resolucion = models.CharField(max_length=250)
     estado_reclamacion = models.CharField(max_length=13, choices = STATUS_OPTIONS, default="EN")
 
     def __str__(self):
