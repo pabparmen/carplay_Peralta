@@ -1,0 +1,9 @@
+from django.urls import path
+from . import views
+
+app_name = 'feedback'
+
+urlpatterns = [
+    path('add/opinion', views.form_opinion, name='opinion_add'),
+    path('add/reclamacion/', views.form_reclamacion, name='reclamacion_add'),
+]
