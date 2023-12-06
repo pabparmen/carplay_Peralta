@@ -178,7 +178,10 @@ Para efectuar el despliegue con Docker, debemos seguir los siguientes pasos:
     -Instale el producto siguiendo los pasos y reinicie su dispositivo.
     -Vuelva a abrir la aplicación Docker Desktop y elija la opción de entrar sin iniciar sesión (o bien puede registrarse si lo desea)
   2. Abra su términal y vaya a la carpeta base del proyecto (Para evitar problemas lance su entorno de Python(env) previamente)
-  3. Ejecute el comando: "docker-compose up --build"
+  3. Ejecute el comando:
+     ```
+     docker-compose up --build
+     ```
   4. Cuando termine la ejecución(Observará por pantalla algo parecido a web-1 started), vaya a la dirección localhost:8000
 
 Y con ello bastaría para realizar el despliegue :)
