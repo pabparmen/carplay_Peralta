@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Reclamaciones
+{% endblock %}
+
+{% block content %}
+<h1>Estaremos encantados de escuchar sus problemas usando nuestros servicios</h1>
+<form method="post" class="reclamacion-form">
+    {{ form.as_p }}
+    <p><input type="submit" value="Enviar Reclamacion"></p>
+    {% csrf_token %}
+</form>
+{% endblock %}

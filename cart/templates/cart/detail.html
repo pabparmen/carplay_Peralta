@@ -4,6 +4,36 @@
  Your shopping cart
 {% endblock %}
 {% block content %}
+<style>
+    .imagen-limitada {
+      max-width: 300px;
+      max-height: 200px;
+      width: auto;
+      height: auto;
+    }
+    .producto {
+        display: flex;
+        align-items: center;
+    }
+    .detalles-producto {
+        flex-grow: 1;
+        
+    }
+
+    .btn-search {
+        background-color: #f8a976;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-search:hover {
+        background-color: #a16e4b;
+    }
+  </style>
+
  <h1>Tu carrito de compra</h1>
  {% if cart %}
  <table class="cart">
@@ -24,7 +54,7 @@
                     <td>
                         <a href="{{ product.get_absolute_url }}">
                             <img src="{% if product.image %}{{ product.image.url }}
-                            {% else %}{% static "img/no_image.png" %}{% endif %}">
+                            {% else %}{% static "img/no_image.png" %}{% endif %}" class="imagen-limitada">
                         </a>
                     </td>
                         <td>{{ product.name }}</td>

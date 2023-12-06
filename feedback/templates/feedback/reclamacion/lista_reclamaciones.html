@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Tus reclamaciones{% endblock %}
+{% block content %}
+ <h2>Reclamaciones </h2>
+{% if reclamaciones %}
+    <ul>
+        {% for reclamacion in reclamaciones %}
+            <li>{{ reclamacion.num_referencia }} - {{ reclamacion.asunto }} - {{ reclamacion.estado_reclamacion }} - {{ reclamacion.resolucion }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay reclamaciones para este usuario.</p>
+{% endif %}
+{% endblock %}
