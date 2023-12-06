@@ -167,3 +167,19 @@ abre el enlace https://dashboard.stripe.com/test/webhooks y deberia de salir el 
 En el cmd donde estamos ejecutando Stripe, es donde aparecerán los diferentes eventos que ocurren
 
 Las claves de Webhook caducan a los 90 dias de haberse generado, y recordad que deben permanecer en secreto.
+
+
+### Despliegue de la aplicación con Docker
+
+Para efectuar el despliegue con Docker, debemos seguir los siguientes pasos:
+
+  1. Si usted no cuenta con la instalación de Docker en su dispositivo, la forma más fácil para instalarlo es la siguiente(Windows):
+    -Acuda al siguiente enlace y descargue la versión pertinente para su dispositivo: https://www.docker.com/products/docker-desktop/
+    -Instale el producto siguiendo los pasos y reinicie su dispositivo.
+    -Vuelva a abrir la aplicación Docker Desktop y elija la opción de entrar sin iniciar sesión (o bien puede registrarse si lo desea)
+  2. Abra su términal y vaya a la carpeta base del proyecto (Para evitar problemas lance su entorno de Python(env) previamente)
+  3. Ejecute el comando: "docker-compose up --build"
+  4. Cuando termine la ejecución(Observará por pantalla algo parecido a web-1 started), vaya a la dirección localhost:8000
+
+Y con ello bastaría para realizar el despliegue :)
+     
