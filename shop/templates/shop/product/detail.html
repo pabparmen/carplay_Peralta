@@ -72,5 +72,23 @@
     <h3>Información:</h3>
     <p>{{ product.description|linebreaks }}</p>
 
+    <!--Este bloque de comentario hace referencia a grandes rasgos de como debería de estar localizado
+          el listado de opiniones del usuario, colocando el formulario propio arriba del todo-->
+        <h3> Deje su opión sobre el producto aquí! </h3>
+          <form method="post" class="opinion-form">
+          {{ opinion_form }}
+          {% csrf_token %}
+          <input type="submit" value="Enviar Opinon" class="btn-search">
+          </form>
+          <h3> Opiniones </h3>
+          <table>
+            {% for item in opiniones %}
+                    <tr>
+                            <td>{{ item.usuario }}</td>
+                            <td class="num">{{ item.puntuacion }}</td>
+                            <td>{{ item.descripcion }}</td>
+                    </tr>
+            {% endfor %}
+          </table>
   </div>
 {% endblock %}

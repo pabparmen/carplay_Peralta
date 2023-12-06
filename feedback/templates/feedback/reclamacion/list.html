@@ -1,0 +1,131 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Productos{% endif %}
+{% endblock %}
+
+{% block content %}
+
+  
+<style>
+  .imagen-limitada {
+    max-width: 300px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+  }
+
+  #search-form {
+      margin-bottom: 20px;
+    }
+
+  #search-form form {
+    display: flex;
+    align-items: center;
+  }
+
+  #search-form label {
+    margin-right: 10px;
+  }
+
+  #search-form input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  #search-form button {
+    padding: 8px 12px;
+    background-color: #f8a976;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #search-form button:hover {
+    background-color: #f8a976;
+  }
+</style>
+
+
+  <div id="container" style="display: flex;">
+    <div id="sidebar" style="flex: 1; padding-right: 20px;">
+      <h3>Categorias</h3>
+      <ul>
+        <li {% if not category %}class="selected"{% endif %}>
+          <a href="{% url "shop:product_list" %}">Todas</a>
+        </li>
+        {% for c in categories %}
+          <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h3>Departamento</h3>
+      <ul>
+        <li {% if not department %}class="selected"{% endif %}>
+          <a href="{% url "shop:product_list" %}">Todos</a>
+        </li>
+        {% for d in departments %}
+          <li {% if department.slug == d.slug %}class="selected"{% endif %}>
+            <a href="{{ d.get_absolute_url }}">{{ d.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h3>Fabricante</h3>
+      <ul>
+        <li {% if not manufacturer %}class="selected"{% endif %}>
+          <a href="{% url "shop:product_list" %}">Todos</a>
+        </li>
+        {% for m in manufacturers %}
+          <li {% if manufacturer.slug == m.slug %}class="selected"{% endif %}>
+            <a href="{{ m.get_absolute_url }}">{{ m.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+
+    </div>
+
+    <div id="main" class="product-list" style="flex: 3;">
+
+      <div id="search-form">
+        <form method="get" action="{% url 'shop:product_list' %}">
+          <label for="search">Buscar:</label>
+          <input type="text" name="q" id="search" value="{% if search_query %}{{ search_query }}{% endif %}" />
+          <button type="submit">Buscar</button>
+        </form>
+      </div>
+
+      <h1>{% if category %}{{ category.name }}{% else %}Productos{% endif %}</h1>
+      {% for product in products %}
+        {%if not product.available%}
+          <div class="producto" style="display: flex; align-items: center;">
+            <a href="{{ product.get_absolute_url }}">
+              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="imagen-limitada">
+            </a>
+            <div class ="detalles-producto" style="flex-grow: 1;">
+              <h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+              <p>Precio: {{ product.price }}€</p>
+              <strong><h2 style="color: red;">AGOTADO</h2></strong>
+            </div>
+          </div>
+        {%else%}
+          <div class="producto" style="display: flex; align-items: center;">
+            <a href="{{ product.get_absolute_url }}">
+              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="imagen-limitada">
+            </a>
+            <div class ="detalles-producto" style="flex-grow: 1;">
+              <h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+              <p>Precio: {{ product.price }}€</p>
+            </div>
+          </div>
+        {%endif%}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
