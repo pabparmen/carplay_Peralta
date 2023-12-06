@@ -61,6 +61,7 @@ def product_detail(request, id, slug):
     cart_product_form = CartAddProductForm()
     opinion_form = UserOpinionForm()
     user = request.user
+    print(opinion_form)
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,
