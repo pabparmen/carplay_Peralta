@@ -3,7 +3,7 @@ from .models import Reclamacion, Opinion
 
 @admin.register(Reclamacion)
 class ReclamacionAdmin(admin.ModelAdmin):
-    list_display = ['usuario', 'asunto', 'descripcion', 'estado_reclamacion']
+    list_display = ['usuario', 'asunto', 'descripcion', 'estado_reclamacion', 'num_referencia']
 
 @admin.register(Opinion)
 class OpinionAdmin(admin.ModelAdmin):

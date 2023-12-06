@@ -14,11 +14,15 @@ def form_reclamacion(request):
             reclamacion = form.save(commit=False)
             reclamacion.usuario = request.user
             reclamacion.save()
-            return render(request, 'feedback/reclamacion/list.html', {'user': request.user})
+            return render(request, 'feedback/reclamacion/reclamacion_enviada.html', {'user': request.user})
     else:
-        form = UserReclamacionForm(instance=reclamacion)
+        form = UserReclamacionForm()
 
     return render(request, 'feedback/reclamacion/form_reclamacion.html', {'user': request.user, 'form': form})
+@login_required
+def list_reclamaciones(request):
+    reclamaciones = Reclamacion.objects.filter(usuario=request.user)
+    return render(request, 'feedback/reclamacion/lista_reclamaciones.html', {'reclamaciones': reclamaciones})
 
 @login_required
 def form_opinion(request):

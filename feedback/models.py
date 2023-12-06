@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from shop.models import Product
+import random
 
 # Un usuario puede tener múltiples reclamaciones
 class Reclamacion(models.Model):
@@ -12,9 +13,19 @@ class Reclamacion(models.Model):
                         ("RE", "Resuelta")]
     resolucion = models.CharField(max_length=250)
     estado_reclamacion = models.CharField(max_length=13, choices = STATUS_OPTIONS, default="EN")
-
+    num_referencia = models.BigIntegerField(unique=True, default=0)
     def __str__(self):
         return f'Reclamacion {self.usuario}, {self.asunto}, {self.estado_reclamacion}'
+
+    def save(self, *args, **kwargs):
+            while True:
+                nuevo_numero = random.randint(10**9, (10**10)-1)
+                # Verificar si el número ya existe en la base de datos
+                if not Reclamacion.objects.filter(num_referencia=nuevo_numero).exists():
+                    break
+
+            self.num_referencia = nuevo_numero
+            super().save(*args, **kwargs)
 
 # Una opinion tener múltiples combinaciones producto usuario
 class Opinion(models.Model):
