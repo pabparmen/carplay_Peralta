@@ -54,18 +54,47 @@ def product_detail(request, id, slug):
 
     try:
         opiniones = Opinion.objects.filter(producto=product)
-        print(opiniones)
     except Opinion.DoesNotExist:
         opiniones = None
 
     cart_product_form = CartAddProductForm()
-    opinion_form = UserOpinionForm()
     user = request.user
-    print(opinion_form)
+
+
+    try:
+        opinion = Opinion.objects.filter(usuario=user).filter(producto=product).get()
+    except Opinion.DoesNotExist:
+        opinion = None 
+
+
+    if request.method == 'POST':
+        if opinion: #si existen datos se actualiza el formulario
+            form = UserOpinionForm(request.POST, instance=opinion)
+        else:  # Si no existen datos de entrega crea un nuevo formulario
+            form = UserOpinionForm(request.POST)
+
+        if form.is_valid():
+            opinion = form.save(commit=False)
+            opinion.usuario = request.user
+            opinion.producto = product
+            opinion.save()
+            #Debe volver al detalle del producto del cual se crea opinion
+            return render(request,
+                  'shop/product/detail.html',
+                  {'product': product,
+                   'user': user,
+                   'opiniones': opiniones,
+                   'cart_product_form': cart_product_form,
+                   'opinion_form':form})
+    else:
+        form = UserOpinionForm(instance=opinion)
+
+
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,
                    'user': user,
                    'opiniones': opiniones,
                    'cart_product_form': cart_product_form,
-                   'opinion_form':opinion_form})
+                   'opinion_form':form})
+
