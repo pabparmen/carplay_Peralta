@@ -176,7 +176,7 @@ Para efectuar el despliegue con Docker, debemos seguir los siguientes pasos:
   1. Si usted no cuenta con la instalación de Docker en su dispositivo, la forma más fácil para instalarlo es la siguiente(Windows):
     -Acuda al siguiente enlace y descargue la versión pertinente para su dispositivo: https://www.docker.com/products/docker-desktop/
     -Instale el producto siguiendo los pasos y reinicie su dispositivo.
-    -Vuelva a abrir la aplicación Docker Desktop y elija la opción de entrar sin iniciar sesión (o bien puede registrarse si lo desea)
+    -Vuelva a abrir la aplicación Docker Desktop y elija la opción de entrar e iniciar sesión (utilizando su cuenta de github por ejemplo)
   2. Abra su términal y vaya a la carpeta base del proyecto (Para evitar problemas lance su entorno de Python(env) previamente)
   3. Ejecute el comando:
      ```
