@@ -50,6 +50,9 @@ class Pedido(models.Model):
     def __str__(self):
         return f'Pedido {self.id}'
     
+    def cadena(self):
+        return f'Este pago fue realizado por {self.nombre} {self.apellidos} con dirección: {self.direccion} y con código postal: {self.codigo_postal} en la ciudad de: {self.ciudad} cuyo numero de referencia es: {self.num_referencia} cuyo coste total asciende a {self.coste_total}'
+    
     def get_total_cost(self):
         coste_total_sin_envio = sum(item.get_cost() for item in self.items.all())
         #El coste del envio general si el pedido excede los 50 se reduce a 0
@@ -91,7 +94,7 @@ class PedidoItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return str(self.id)
+        return f'Producto: {self.product}, Cantidad: {self.quantity} + Precio: {self.price}'
     
     def get_cost(self):
         return self.price * self.quantity
