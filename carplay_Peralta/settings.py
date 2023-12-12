@@ -148,3 +148,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'peraltacarplay@gmail.com'
+EMAIL_HOST_PASSWORD = 'tisi yzlj xehz jxcg'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

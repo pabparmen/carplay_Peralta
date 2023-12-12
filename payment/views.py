@@ -3,6 +3,7 @@ import stripe
 from django.conf import settings
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from pedidos.models import Pedido
+from payment.tasks import payment_completed
 
 # creación de la instancia Stripe 
 stripe.api_key = settings.STRIPE_SECRET_KEY
