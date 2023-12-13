@@ -183,19 +183,23 @@ Para efectuar el despliegue con Docker, debemos seguir los siguientes pasos:
      docker-compose up --build
      ```
   4. Cuando termine la ejecución(Observará por pantalla algo parecido a web-1 started), vaya a la dirección localhost:8000
+     
+Y con ello bastaría para realizar el despliegue :)
 
-  5. En cambio, si se desea desplegar docker mediante la importación de una imagen Docker, debemos iniciar Docker Desktop, abrir una
+### Despliegue de la aplicación con Docker a través de nuestra imagen del proyecto
+
+  1. En cambio, si se desea desplegar docker mediante la importación de una imagen Docker, debemos iniciar Docker Desktop, abrir una
       terminal del sistema y ejecutar el siguiente comando:
      ```
      docker load -i nombre_del_archivo.tar
      ```
 
-   6. Una vez importada la imagen, debemos hacer click al botón de "Run" (Triángulo tumbado)
+  2. Una vez importada la imagen, debemos hacer click al botón de "Run" (Triángulo tumbado)
 
-   7. Nos aparecerá una ventana emergente para crear un contenedor donde inicializar la aplicación, aquí debemos desplegar las opciones avanzadas para crear
+  3. Nos aparecerá una ventana emergente para crear un contenedor donde inicializar la aplicación, aquí debemos desplegar las opciones avanzadas para crear
       el contenedor y en la opción del puerto (Port) debemos indicar que sea el 8000
 
-   8.  Cuando se inicie el contenedor (saldrá running), vaya a la dirección localhost:8000
+  4.  Cuando se inicie el contenedor (saldrá running), vaya a la dirección localhost:8000
 
 
 Y con ello bastaría para realizar el despliegue :)
