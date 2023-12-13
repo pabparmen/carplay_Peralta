@@ -1,5 +1,55 @@
 # PROYECTO CARPLAY PERALTA
 
+### Despliegue de la aplicación con Docker a través de nuestra imagen del proyecto
+
+Si se desea desplegar docker mediante la importación de nuestra imagen Docker adjuntada en la entrega del proyecto, podemos hacerlo de dos formas.
+
+Si usted no cuenta con la instalación de Docker en su dispositivo, la forma más fácil para instalarlo es la siguiente(Windows):
+  - Acuda al siguiente enlace y descargue la versión pertinente para su dispositivo: https://www.docker.com/products/docker-desktop/
+  - Instale el producto siguiendo los pasos y reinicie su dispositivo.
+  - Vuelva a abrir la aplicación Docker Desktop y elija la opción de entrar e iniciar sesión (recomendamos que inicie sesión con su cuenta de github)
+
+#### Primero deberá descombrimir el archivo .zip, para poder extraer el archivo .tar.
+
+a) Mediante comandos directamente:
+
+  1. Abrimos la terminar del sistema y ejecutamos el comando:
+     ```
+     docker load -i carplay_peralta.tar
+     ```
+
+  2. En la misma terminal, ejecutamos este comando:
+     ```
+     docker run -p 8000:8000 carplay_peralta-web
+     ```
+     
+  3. Aparecerá la siguiente linea en la terminal:
+![imagen](https://github.com/pabparmen/carplay_Peralta/assets/59439742/e16b49bf-128a-4e4b-a330-27f8e91efb83)
+
+   4. El contenedor ya esta iniciado, vaya a la dirección localhost:8000 en el navegador
+
+b) Con la aplicación de Docker Desktop:
+
+  1. Debemos iniciar Docker Desktop, abrir una
+      terminal del sistema y ejecutar el siguiente comando:
+     ```
+     docker load -i carplay_peralta.tar
+     ```
+
+  2. Una vez importada la imagen, debemos hacer click al botón de "Run" (Triángulo tumbado)
+
+  3. Nos aparecerá una ventana emergente para crear un contenedor donde inicializar la aplicación, aquí debemos desplegar las opciones avanzadas para crear
+      el contenedor y en la opción del puerto (Port) debemos indicar que sea el 8000
+
+  4.  Cuando se inicie el contenedor (saldrá running), vaya a la dirección localhost:8000 en el navegador
+
+
+Y con ello bastaría para realizar el despliegue :)
+
+
+
+
+
 <h2> Configurar y desplegar el proyecto </h2>
 Todo el proyecto se ha realizado en Windows, y toda la configuración y despliegue explicado posteriormente se debe realizar en Windows. 
 
@@ -174,35 +224,19 @@ Las claves de Webhook caducan a los 90 dias de haberse generado, y recordad que 
 Para efectuar el despliegue con Docker, debemos seguir los siguientes pasos:
 
   1. Si usted no cuenta con la instalación de Docker en su dispositivo, la forma más fácil para instalarlo es la siguiente(Windows):
-    -Acuda al siguiente enlace y descargue la versión pertinente para su dispositivo: https://www.docker.com/products/docker-desktop/
-    -Instale el producto siguiendo los pasos y reinicie su dispositivo.
-    -Vuelva a abrir la aplicación Docker Desktop y elija la opción de entrar e iniciar sesión (recomendamos que inicie sesión con su cuenta de github)
-  2. Abra su términal y vaya a la carpeta base del proyecto (Para evitar problemas lance su entorno de Python(env) previamente)
-  3. Ejecute el comando:
+       - Acuda al siguiente enlace y descargue la versión pertinente para su dispositivo: https://www.docker.com/products/docker-desktop/
+       - Instale el producto siguiendo los pasos y reinicie su dispositivo.
+       - Vuelva a abrir la aplicación Docker Desktop y elija la opción de entrar e iniciar sesión (recomendamos que inicie sesión con su cuenta de github)
+  3. Abra su términal y vaya a la carpeta base del proyecto (Para evitar problemas lance su entorno de Python(env) previamente)
+  4. Ejecute el comando:
      ```
      docker-compose up --build
      ```
-  4. Cuando termine la ejecución(Observará por pantalla algo parecido a web-1 started), vaya a la dirección localhost:8000
+  5. Cuando termine la ejecución(Observará por pantalla algo parecido a web-1 started), vaya a la dirección localhost:8000
      
 Y con ello bastaría para realizar el despliegue :)
 
-### Despliegue de la aplicación con Docker a través de nuestra imagen del proyecto
 
-  1. En cambio, si se desea desplegar docker mediante la importación de nuestra imagen Docker adjuntada en la entrega del proyecto, debemos iniciar Docker Desktop, abrir una
-      terminal del sistema y ejecutar el siguiente comando:
-     ```
-     docker load -i carplay_peralta.zip
-     ```
-
-  2. Una vez importada la imagen, debemos hacer click al botón de "Run" (Triángulo tumbado)
-
-  3. Nos aparecerá una ventana emergente para crear un contenedor donde inicializar la aplicación, aquí debemos desplegar las opciones avanzadas para crear
-      el contenedor y en la opción del puerto (Port) debemos indicar que sea el 8000
-
-  4.  Cuando se inicie el contenedor (saldrá running), vaya a la dirección localhost:8000
-
-
-Y con ello bastaría para realizar el despliegue :)
 
 
  
