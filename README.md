@@ -191,7 +191,7 @@ Y con ello bastaría para realizar el despliegue :)
   1. En cambio, si se desea desplegar docker mediante la importación de una imagen Docker, debemos iniciar Docker Desktop, abrir una
       terminal del sistema y ejecutar el siguiente comando:
      ```
-     docker load -i nombre_del_archivo.tar
+     docker load -i carplay_peralta.tar
      ```
 
   2. Una vez importada la imagen, debemos hacer click al botón de "Run" (Triángulo tumbado)
