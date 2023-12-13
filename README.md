@@ -188,7 +188,7 @@ Y con ello bastaría para realizar el despliegue :)
 
 ### Despliegue de la aplicación con Docker a través de nuestra imagen del proyecto
 
-  1. En cambio, si se desea desplegar docker mediante la importación de una imagen Docker, debemos iniciar Docker Desktop, abrir una
+  1. En cambio, si se desea desplegar docker mediante la importación de nuestra imagen Docker adjuntada en la entrega del proyecto, debemos iniciar Docker Desktop, abrir una
       terminal del sistema y ejecutar el siguiente comando:
      ```
      docker load -i carplay_peralta.tar
