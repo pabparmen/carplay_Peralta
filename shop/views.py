@@ -60,12 +60,12 @@ def product_detail(request, id, slug):
     cart_product_form = CartAddProductForm()
     user = request.user
 
-
     try:
-        opinion = Opinion.objects.filter(usuario=user).filter(producto=product).get()
-    except Opinion.DoesNotExist:
+        opinion = Opinion.objects.filter(usuario=user).filter(producto=product)
+        opinion = opinion.get()
+    except TypeError or Opinion.DoesNotExist:
         opinion = None 
-
+        
 
     if request.method == 'POST':
         if opinion: #si existen datos se actualiza el formulario
