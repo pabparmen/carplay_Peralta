@@ -62,8 +62,11 @@ def product_detail(request, id, slug):
 
     try:
         opinion = Opinion.objects.filter(usuario=user).filter(producto=product)
-        opinion = opinion.get()
-    except TypeError or Opinion.DoesNotExist:
+        try:
+            opinion = opinion.get()
+        except Opinion.DoesNotExist:
+            opinion = None
+    except TypeError:
         opinion = None 
         
 
